@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PermRAG Master Control Center</title>
+    <link rel="stylesheet" href="/master.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section id="login" class="login-card">
+        <p class="eyebrow">PROTECTED AREA</p>
+        <h1>Master Control Center</h1>
+        <p>Manage your roles, people, documents, permissions, and optional Gemini answer mode.</p>
+        <form id="loginForm">
+          <label>Admin username<input id="username" autocomplete="username" placeholder="admin"></label>
+          <label>Admin password<input id="password" type="password" autocomplete="current-password" placeholder="admin"></label>
+          <p id="loginError" class="error"></p>
+          <button class="primary" type="submit">Unlock controls</button>
+        </form>
+      </section>
+
+      <section id="console" class="hidden">
+        <header>
+          <div><p class="eyebrow">PERMRAG · ADMIN ONLY</p><h1>Master Control Center</h1></div>
+          <div class="header-actions"><a href="/">Open chat</a><button id="signOut" class="quiet">Sign out</button></div>
+        </header>
+        <div class="layout">
+          <nav>
+            <button class="nav active" data-view="overview">Overview</button>
+            <button class="nav" data-view="roles">Roles</button>
+            <button class="nav" data-view="users">Users</button>
+            <button class="nav" data-view="documents">Corpus & permissions</button>
+            <button class="nav" data-view="gemini">Gemini answer mode</button>
+          </nav>
+          <section id="content" class="content"></section>
+        </div>
+      </section>
+    </main>
+    <script src="/master.js"></script>
+  </body>
+</html>

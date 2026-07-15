@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PermRAG — Permission-aware knowledge assistant</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section id="loginView" class="login-layout">
+        <div class="brand-panel">
+          <p class="eyebrow">LOCAL SECURITY DEMO</p>
+          <h1>Perm<span>RAG</span></h1>
+          <p class="lede">A knowledge assistant where access rules apply before retrieval, never after an answer is formed.</p>
+          <div class="security-card">
+            <div class="lock">⌁</div>
+            <div>
+              <strong>Retrieval boundary</strong>
+              <p>Your role is a required argument to the search function. Restricted chunks are excluded before vector scoring and context assembly.</p>
+            </div>
+          </div>
+          <p class="caption">Demo accounts use their role as both username and password.</p>
+        </div>
+        <form id="loginForm" class="card login-card">
+          <p class="eyebrow">SIGN IN</p>
+          <h2>Choose a clearance</h2>
+          <label>Username <input id="username" autocomplete="username" placeholder="sales"></label>
+          <label>Password <input id="password" type="password" autocomplete="current-password" placeholder="sales"></label>
+          <div class="quick-users" aria-label="Demo account shortcuts">
+            <button type="button" data-user="sales">sales</button>
+            <button type="button" data-user="engineering">engineering</button>
+            <button type="button" data-user="hr">hr</button>
+            <button type="button" data-user="finance">finance</button>
+            <button type="button" data-user="admin">admin</button>
+          </div>
+          <p id="loginError" class="error" role="alert"></p>
+          <button class="primary" type="submit">Enter workspace <span>→</span></button>
+        </form>
+      </section>
+
+      <section id="appView" class="app-view hidden">
+        <header class="topbar">
+          <div class="wordmark">Perm<span>RAG</span><small>permission-aware knowledge</small></div>
+          <div class="profile"><span id="roleBadge" class="role-badge"></span><span id="usernameDisplay"></span><button id="logoutButton" class="ghost">Sign out</button></div>
+        </header>
+        <div class="workspace">
+          <aside class="sidebar">
+            <p class="eyebrow">SECURITY STATUS</p>
+            <div class="status"><span class="status-dot"></span> Filter enforced</div>
+            <p>Every search is scoped to your role before ranking. No restricted source can become context.</p>
+            <div class="line"></div>
+            <p class="eyebrow">YOUR WORKSPACE</p>
+            <p>Ask naturally about any information you are allowed to access. The assistant will show the sources it used.</p>
+            <div id="adminNav" class="hidden admin-actions">
+              <div class="line"></div>
+              <p class="eyebrow">ADMIN</p>
+              <button id="showDocs" class="sidebar-action">Document access map</button>
+              <button id="showAudit" class="sidebar-action">Query audit log</button>
+            </div>
+          </aside>
+          <section class="content">
+            <div id="chatPanel" class="panel">
+              <div class="panel-heading"><div><p class="eyebrow">GROUNDED CHAT</p><h2>Ask your knowledge base</h2></div><span class="enforced">● ROLE FILTER ON</span></div>
+              <div id="messages" class="messages">
+                <article class="message assistant"><div class="avatar">P</div><div><p>Hi — I’ll answer only from documents your current role can retrieve. Try a question or one of the examples.</p></div></article>
+              </div>
+              <form id="chatForm" class="composer">
+                <textarea id="query" rows="2" maxlength="2000" placeholder="Ask a question about company knowledge…"></textarea>
+                <button id="sendButton" class="primary" type="submit">Send <span>↑</span></button>
+              </form>
+            </div>
+            <div id="adminPanel" class="panel hidden"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
